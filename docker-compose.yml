@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: cine_mysql
+    environment:
+      MYSQL_DATABASE: cine_sendera
+      MYSQL_USER: cine_user
+      MYSQL_PASSWORD: cine_pass
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

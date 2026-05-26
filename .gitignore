@@ -1,0 +1,5 @@
+backups/
+*.sql.gz
+public/config/db.php
+public/lib/
+.claude/
