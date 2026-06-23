@@ -50,6 +50,8 @@ if (is_dir($backup_dir)) {
         <nav class="sidebar-nav">
             <a href="index.php">Dashboard</a>
             <a href="ventas.php">Ventas</a>
+            <a href="peliculas.php">Películas</a>
+            <a href="cupones.php">Cupones</a>
             <a href="personal.php">Personal</a>
             <a href="backup.php" class="active">Backup</a>
             <a href="../validar_qr.php">Validar QR</a>

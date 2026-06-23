@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS cupones (
     descuento_pct INT NOT NULL,
     activo TINYINT(1) DEFAULT 1,
     usos_max INT NOT NULL,
-    usos_actual INT DEFAULT 0
+    usos_actual INT DEFAULT 0,
+    hora_limite TIME DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS ventas (
@@ -98,7 +99,7 @@ INSERT INTO funciones (pelicula_id, sala_id, fecha_hora, precio) VALUES
 INSERT INTO cupones (codigo, descuento_pct, activo, usos_max, usos_actual) VALUES
 ('SENDERA10', 10, 1, 100, 0),
 ('PROMO20', 20, 1, 50, 0),
-('MATINE50', 50, 1, 1000, 0);
+('MATINE50', 50, 1, 1000, 0, '12:00:00');
 
 INSERT INTO asientos (funcion_id, fila, columna, estado)
 SELECT f.id, filas.fila, cols.col, 'libre'

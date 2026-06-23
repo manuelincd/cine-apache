@@ -40,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <nav class="sidebar-nav">
             <a href="index.php">Dashboard</a>
             <a href="ventas.php">Ventas</a>
+            <a href="peliculas.php">Películas</a>
+            <a href="cupones.php">Cupones</a>
             <a href="personal.php" class="active">Personal</a>
             <a href="backup.php">Backup</a>
             <a href="../validar_qr.php">Validar QR</a>

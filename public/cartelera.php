@@ -61,7 +61,6 @@ while ($row = $res->fetch_assoc()) {
 <div class="main-content">
     <div class="container">
         <h1 class="page-title">Cartelera</h1>
-        <p class="page-subtitle">Las mejores películas en una experiencia única</p>
         <div class="grid-peliculas">
             <?php foreach ($peliculas as $p): ?>
             <div class="card-pelicula">

@@ -54,14 +54,16 @@ $cupon_ok = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aplicar_cupon'])) {
     $codigo = strtoupper(trim($_POST['cupon'] ?? ''));
     if ($codigo) {
-        $stmt = $conn->prepare("SELECT id, descuento_pct, usos_actual, usos_max FROM cupones WHERE codigo = ? AND activo = 1");
+        $stmt = $conn->prepare("SELECT id, descuento_pct, usos_actual, usos_max, hora_limite FROM cupones WHERE codigo = ? AND activo = 1");
         $stmt->bind_param('s', $codigo);
         $stmt->execute();
         $cup = $stmt->get_result()->fetch_assoc();
         if ($cup && $cup['usos_actual'] < $cup['usos_max']) {
-            $hora_funcion = (int)date('H', strtotime($funcion['fecha_hora']));
-            if ($codigo === 'MATINE50' && $hora_funcion >= 12) {
-                $cupon_msg = 'El cupón MATINE50 solo aplica en funciones antes de las 12:00 pm.';
+            $hora_bloqueada = $cup['hora_limite'] !== null
+                && date('H:i:s', strtotime($funcion['fecha_hora'])) >= $cup['hora_limite'];
+            if ($hora_bloqueada) {
+                $limite_fmt = date('g:i a', strtotime($cup['hora_limite']));
+                $cupon_msg = "Este cupón solo aplica en funciones antes de las $limite_fmt.";
                 unset($_SESSION['cupon_aplicado']);
             } else {
                 $descuento = $subtotal * ($cup['descuento_pct'] / 100);
